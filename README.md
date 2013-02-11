@@ -1,12 +1,14 @@
 # RackRailsLogger
 
-TODO: Write a gem description
+Rails-like logger for rake.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add these lines to your application's Gemfile:
 
-    gem 'rack_rails_logger'
+    group :development do
+      gem 'rack_rails_logger'
+    end
 
 And then execute:
 
@@ -18,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ rails generate rack_rails_logger:install
 
 ## Contributing
 
