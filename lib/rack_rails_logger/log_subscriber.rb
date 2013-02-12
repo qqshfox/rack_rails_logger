@@ -8,7 +8,7 @@ module RackRailsLogger
     def start_processing(event)
       payload = event.payload
       params  = payload[:params].except(*INTERNAL_PARAMS)
-      info %(Processing "#{payload[:method]} #{payload[:path]}" from #{payload[:from]})
+      info %(Processing "#{payload[:method]} #{payload[:path]}" for #{payload[:from]} from #{payload[:referer]})
       info "  Parameters: #{params.inspect}" unless params.empty?
     end
 
