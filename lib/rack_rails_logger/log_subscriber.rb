@@ -1,4 +1,5 @@
 require 'active_support/log_subscriber'
+require 'active_support/core_ext/hash/except'
 
 module RackRailsLogger
   class LogSubscriber < ActiveSupport::LogSubscriber
