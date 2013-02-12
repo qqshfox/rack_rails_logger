@@ -1,7 +1,8 @@
-require 'action_dispatch/http/request'
+require 'action_dispatch'
 require 'active_support/notifications'
 require 'active_support/core_ext/module/attr_internal'
 require 'benchmark'
+require 'active_support/core_ext/benchmark.rb'
 
 module RackRailsLogger
   class Base
