@@ -17,11 +17,10 @@ module RackRailsLogger
       request = ActionDispatch::Request.new(env)
 
       raw_payload = {
-        :params   => request.filtered_parameters,
-        :method   => request.method,
-        :path     => (request.fullpath rescue "unknown"),
-        :protocol => request.server_protocol,
-        :from     => request.remote_addr,
+        :params => request.filtered_parameters,
+        :method => request.method,
+        :path   => (request.fullpath rescue "unknown"),
+        :from   => request.remote_addr,
       }
 
       ActiveSupport::Notifications.instrument("start_processing.rack", raw_payload.dup)
