@@ -21,7 +21,6 @@ module RackRailsLogger
         :method      => request.method,
         :path        => (request.fullpath rescue "unknown"),
         :remote_addr => request.remote_addr,
-        :referer     => request.referer,
       }
 
       ActiveSupport::Notifications.instrument("start_processing.rack", raw_payload.dup)
