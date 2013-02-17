@@ -4,11 +4,9 @@ Rails-like logger for rake.
 
 ## Installation
 
-Add these lines to your application's Gemfile:
+Add this line to your application's Gemfile:
 
-    group :development do
-      gem 'rack_rails_logger'
-    end
+    gem 'rack_rails_logger', group: 'development'
 
 And then execute:
 
