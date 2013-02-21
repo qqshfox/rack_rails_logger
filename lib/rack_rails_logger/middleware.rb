@@ -14,12 +14,15 @@ module RackRailsLogger
 
     def process_action(env)
       request = ActionDispatch::Request.new(env)
+      queue_start_time = env["HTTP_X_QUEUE_START"] || env["HTTP_X_REQUEST_START"]
+      queuing_time = queue_start_time && (Time.now.to_f * 1_000_000 - queue_start_time.gsub("t=", "").to_i) / 1000
 
       raw_payload = {
         :params      => request.filtered_parameters,
         :method      => request.method,
         :path        => (request.fullpath rescue "unknown"),
         :remote_addr => request.remote_addr,
+        :queuing_time => queuing_time
       }
 
       ActiveSupport::Notifications.instrument("start_processing.rack", raw_payload.dup)

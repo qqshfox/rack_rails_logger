@@ -8,9 +8,11 @@ module RackRailsLogger
     def start_processing(event)
       payload = event.payload
       params  = payload[:params].except(*INTERNAL_PARAMS)
+      queuing_time = payload[:queuing_time]
+
       debug
       debug
-      info %(Processing #{payload[:method]} "#{payload[:path]}" for #{payload[:remote_addr]} at #{Time.now})
+      info %(Processing #{payload[:method]} "#{payload[:path]}" for #{payload[:remote_addr]} at #{Time.now}#{queuing_time && " (Queuing time #{queuing_time}ms)"})
       info "  Parameters: #{params.inspect}" unless params.empty?
     end
 
