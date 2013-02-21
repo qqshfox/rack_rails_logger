@@ -13,7 +13,11 @@ module RackRailsLogger
       @app = app
     end
 
-    def call(env)
+    def call(*args, &block)
+      process_action(*args, &block)
+    end
+
+    def process_action(env)
       request = ActionDispatch::Request.new(env)
 
       raw_payload = {
