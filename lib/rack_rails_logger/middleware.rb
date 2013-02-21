@@ -1,13 +1,8 @@
 require 'action_dispatch'
 require 'active_support/notifications'
-require 'active_support/core_ext/module/attr_internal'
-require 'benchmark'
-require 'active_support/core_ext/benchmark.rb'
 
 module RackRailsLogger
   middleware = Class.new do
-
-    attr_internal :rack_runtime
 
     def initialize(app)
       @app = app
@@ -30,10 +25,7 @@ module RackRailsLogger
       ActiveSupport::Notifications.instrument("start_processing.rack", raw_payload.dup)
 
       ActiveSupport::Notifications.instrument("process_action.rack", raw_payload) do |payload|
-        result = nil
-        self.rack_runtime = cleanup_rack_runtime do
-          Benchmark.ms { result = @app.call(env) }
-        end
+        result = @app.call(env)
         payload[:status] = result[0]
         append_info_to_payload(payload)
         result
@@ -41,9 +33,7 @@ module RackRailsLogger
     end
 
     def self.log_process_action(payload)
-      messages, rack_runtime = [], payload[:rack_runtime]
-      messages << ("Rack: %.1fms" % rack_runtime.to_f) if rack_runtime
-      messages
+      []
     end
 
     private
@@ -53,7 +43,6 @@ module RackRailsLogger
     end
 
     def append_info_to_payload(payload)
-      payload[:rack_runtime] = rack_runtime
     end
 
   end
