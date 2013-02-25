@@ -1,6 +1,6 @@
 # RackRailsLogger
 
-Rails-like logger for rake.
+Rails-like logger for rack.
 
 ## Installation
 
