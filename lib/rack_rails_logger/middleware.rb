@@ -13,7 +13,7 @@ module RackRailsLogger
     end
 
     def process_action(env)
-      request = ActionDispatch::Request.new(env)
+      request = ActionDispatch::Request.new(env.dup)
       queue_start_time = env["HTTP_X_QUEUE_START"] || env["HTTP_X_REQUEST_START"]
       queuing_time = queue_start_time && (Time.now.to_f * 1_000_000 - queue_start_time.gsub("t=", "").to_i) / 1000
 
